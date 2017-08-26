@@ -22,7 +22,7 @@
         },
 
         created(){
-            this.axios.get('/')
+//            this.axios.get('/')
         }
     }
 </script>

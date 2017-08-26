@@ -6,6 +6,7 @@
             <el-menu-item index="3" :route="{path:'/frame/xlz35429674.3322.org:800'}">Shadowsocks-Manager</el-menu-item>
             <el-menu-item index="4" :route="{path:'/animalGame'}">Animal-Game</el-menu-item>
             <el-menu-item index="5" :route="{path:'/markDown'}">Mark-Down</el-menu-item>
+            <el-menu-item index="6" :route="{path:'/image/upload'}">Image-Upload</el-menu-item>
         </el-menu>
         <div class="content">
             <router-view></router-view>

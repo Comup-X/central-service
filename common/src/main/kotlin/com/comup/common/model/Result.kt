@@ -12,9 +12,16 @@ class Result(code: Int, message: String, data: Any) {
         get
         set
 
+    constructor() : this(500,"Default Error",Any())
+
     companion object {
-        fun Ok(data: String): Result {
+        fun ok(data: String): Result {
             return Result(0, "SUCCESS", data)
         }
+
+        fun error(message: String): Result {
+            return Result(500, message, Any())
+        }
     }
+
 }
