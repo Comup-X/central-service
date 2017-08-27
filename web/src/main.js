@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 Vue.use(ElementUI);
 
 //设置后台基础IP地址
-axios.defaults.baseURL = 'http://127.0.0.1:8081';
+axios.defaults.baseURL = 'http://127.0.0.1:8080';
 //设置请求头
 // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 //添加axios到Vue全局变量中

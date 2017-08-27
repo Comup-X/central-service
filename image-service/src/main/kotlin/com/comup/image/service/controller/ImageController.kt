@@ -24,9 +24,8 @@ class ImageController {
         private var logger = LoggerFactory.getLogger(ImageController::class.java)
     }
 
-    @CrossOrigin
     @PostMapping("/upload")
-    fun upload(request: HttpServletRequest, @RequestParam("file") file: MultipartFile): Result {
+    fun upload( @RequestParam("file") file: MultipartFile): Result {
         if (!file.isEmpty) {
             val split = file.originalFilename.split(".")
             val fileName = UUID.randomUUID().toString() + "." + split[split.lastIndex]
@@ -40,7 +39,11 @@ class ImageController {
             out.close()
             return Result.ok(fileName)
         }
-        logger.info("User IP[{}] upload an empty file", request.remoteHost)
         return Result.error("File is empty")
+    }
+
+    @GetMapping("/test")
+    fun test(name:String):String{
+        return  "hello $name"
     }
 }

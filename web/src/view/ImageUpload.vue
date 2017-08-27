@@ -1,13 +1,19 @@
 <template>
     <div>
-        <el-upload
-                class="avatar-uploader"
-                :action="axios.defaults.baseURL+'/image/upload'"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess">
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+
+        <form enctype="multipart/form-data" :action="axios.defaults.baseURL+'/imageUpload'" method="post">
+            <input type="file" name="file" />
+            <input type="submit" value="上传文件" />
+        </form>
+
+        <!--<el-upload-->
+                <!--class="avatar-uploader"-->
+                <!--:action="axios.defaults.baseURL+'/imageUpload'"-->
+                <!--:show-file-list="false"-->
+                <!--:on-success="handleAvatarSuccess">-->
+            <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+            <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+        <!--</el-upload>-->
     </div>
 </template>
 

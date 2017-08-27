@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import javax.servlet.MultipartConfigElement
 
 
-//@Configuration
+@Configuration
 class FileUploadConfiguration {
 
     @Bean
@@ -18,7 +18,7 @@ class FileUploadConfiguration {
         /// 设置总上传数据总大小
         factory.setMaxRequestSize("128MB")
         // Sets the directory location where files will be stored.
-        factory.setLocation("/root/image/upload")
+        //factory.setLocation("/root/image/upload")
         return factory.createMultipartConfig()
     }
 }
