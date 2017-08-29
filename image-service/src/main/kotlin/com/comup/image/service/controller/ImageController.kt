@@ -1,23 +1,19 @@
 package com.comup.image.service.controller
 
 import com.comup.common.model.Result
+import com.comup.image.service.service.ImageService
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import java.io.BufferedOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.nio.file.Paths
-import java.util.*
 
 
 @RestController
 @RequestMapping("/image")
 class ImageController {
 
-    @Value("\${image.upload.location}")
-    private lateinit var uploadLocation: String
+    @Autowired
+    private lateinit var imageService: ImageService
 
     companion object {
         private var logger = LoggerFactory.getLogger(ImageController::class.java)
@@ -25,20 +21,7 @@ class ImageController {
 
     @PostMapping("/upload")
     fun upload(@RequestParam("file") file: MultipartFile): Result {
-        if (!file.isEmpty) {
-            val split = file.originalFilename.split(".")
-            val fileName = UUID.randomUUID().toString() + "." + split[split.lastIndex]
-            val willSaveFile = File(Paths.get(uploadLocation, fileName).toUri())
-            if (!willSaveFile.exists()) {
-                willSaveFile.createNewFile()
-            }
-            val out = BufferedOutputStream(FileOutputStream(willSaveFile))
-            out.write(file.bytes)
-            out.flush()
-            out.close()
-            return Result.ok(fileName)
-        }
-        return Result.error("File is empty")
+        return imageService.saveFile(file)
     }
 
     @GetMapping("/test")
