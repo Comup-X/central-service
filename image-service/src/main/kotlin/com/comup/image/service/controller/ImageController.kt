@@ -10,7 +10,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.nio.file.Paths
 import java.util.*
-import javax.servlet.http.HttpServletRequest
 
 
 @RestController
@@ -25,7 +24,7 @@ class ImageController {
     }
 
     @PostMapping("/upload")
-    fun upload( @RequestParam("file") file: MultipartFile): Result {
+    fun upload(@RequestParam("file") file: MultipartFile): Result {
         if (!file.isEmpty) {
             val split = file.originalFilename.split(".")
             val fileName = UUID.randomUUID().toString() + "." + split[split.lastIndex]
@@ -43,7 +42,7 @@ class ImageController {
     }
 
     @GetMapping("/test")
-    fun test(name:String):String{
-        return  "hello $name"
+    fun test(name: String): String {
+        return "hello $name"
     }
 }
