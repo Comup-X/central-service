@@ -11,3 +11,11 @@ class ImageServiceApplication
 fun main(args: Array<String>) {
     SpringApplication.run(ImageServiceApplication::class.java, *args)
 }
+
+fun String.print() {
+    print(this)
+}
+
+fun String.println() {
+    println(this)
+}

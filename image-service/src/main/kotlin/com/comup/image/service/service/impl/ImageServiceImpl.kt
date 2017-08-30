@@ -39,4 +39,6 @@ class ImageServiceImpl : ImageService {
             return Result.error("文件不能为空")
         }
     }
+
+
 }
