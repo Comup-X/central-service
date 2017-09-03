@@ -1,21 +1,14 @@
 package com.comup.common.model
 
-class Result(code: Int, message: String, data: Any) {
-    private var code: Int = code
-        get
-        set
-    private var message: String = message
-        get
-        set
+data class Result(
+        var code: Int,
+        var message: String,
+        var data: Any) {
 
-    private var data: Any = data
-        get
-        set
-
-    constructor() : this(500,"Default Error",Any())
+    constructor() : this(-1, "Default Error", Any())
 
     companion object {
-        fun ok(data: String): Result {
+        fun ok(data: Any): Result {
             return Result(0, "SUCCESS", data)
         }
 

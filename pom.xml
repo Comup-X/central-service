@@ -11,9 +11,10 @@
 
     <modules>
         <module>common</module>
+        <module>gateway</module>
         <module>registry</module>
-        <module>image-service</module>
-        <module>api</module>
+        <module>file-service</module>
+        <!--<module>api</module>-->
     </modules>
 
     <parent>
@@ -49,6 +50,11 @@
             <groupId>com.comup</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.9.0</version>
         </dependency>
     </dependencies>
 
