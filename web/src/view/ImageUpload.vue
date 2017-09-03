@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <form enctype="multipart/form-data" :action="axios.defaults.baseURL+'/file/upload'" method="post">
+        <form enctype="multipart/form-data" :action="axios.defaults.baseURL+'/zuul/file/upload'" method="post">
             <input type="file" name="file" />
             <input type="text" name="parentIdentifier"/>
             <input type="submit" value="上传文件" />
