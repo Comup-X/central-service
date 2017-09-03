@@ -1,15 +1,16 @@
 package com.comup.file.service.controller
 
 import com.comup.common.model.Result
+import com.comup.file.service.entity.FileInfo
+import com.comup.file.service.entity.pk.FileInfoPK
 import com.comup.file.service.service.FileService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.data.domain.Page
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 
 @RestController
@@ -27,8 +28,21 @@ class FileController {
     fun upload(request: HttpServletRequest,
                @RequestParam(name = "file", required = true) file: MultipartFile,
                @RequestParam(name = "parentIdentifier", required = false) parentIdentifier: String?): Result {
-        logger.info(parentIdentifier)
-        logger.info(request.getHeader("content-type"))
         return Result.ok(fileService.saveFile(file, parentIdentifier))
+    }
+
+    @GetMapping("/listFile")
+    fun listFile(request: HttpServletRequest,
+                 @RequestParam(name = "currentPage", required = true) currentPage: Int,
+                 @RequestParam(name = "pageSize", required = true) pageSize: Int,
+                 @RequestParam(name = "types", required = false) types: List<String>?): Page<FileInfo> {
+        return fileService.listFile(currentPage, pageSize, types)
+    }
+
+    @GetMapping("/downLoad")
+    fun downLoad(request: HttpServletRequest,
+                 response: HttpServletResponse,
+                 @ModelAttribute("fileInfoPK") fileInfoPK: FileInfoPK) {
+        fileService.flushFile(response,fileInfoPK)
     }
 }

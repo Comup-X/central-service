@@ -11,5 +11,4 @@ data class FileInfoPK(
         var path: String = "",
         var fileName: String = ""
 ) : Serializable {
-    fun getPort() = if (port == 0) null else port
 }
