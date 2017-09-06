@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="overflow:auto;">
         开发中。。。
         <el-row class="fullSpace">
             <el-col :span="12">
@@ -55,7 +55,6 @@
 </script>
 
 <style>
-
 
 
     .fullSpace {

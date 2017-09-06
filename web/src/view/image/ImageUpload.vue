@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <div style="overflow:auto;">
         <form enctype="multipart/form-data" :action="axios.defaults.baseURL+'/zuul/file/upload'" method="post">
             <input type="file" name="file" />
             <input type="text" name="parentIdentifier"/>

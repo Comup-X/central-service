@@ -14,6 +14,19 @@ Vue.use(ElementUI);
 
 //设置后台基础IP地址
 axios.defaults.baseURL = 'http://127.0.0.1:8080';
+//全局响应预处理
+axios.interceptors.response.use(function (response) {
+    if (response.data.code !== 200) {
+        v.$alert(response.data.message, 'Error', {
+            confirmButtonText: '确定',
+        });
+    } else {
+        return response.data.data;
+    }
+}, function (error) {
+    // Do something with response error
+    return Promise.reject(error);
+});
 //设置请求头
 // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 //添加axios到Vue全局变量中
@@ -23,7 +36,7 @@ Vue.prototype.axios = axios;
 const router = new VueRouter({routes});
 
 //挂载Vue到index.html中id=app的div中
-new Vue({
+let v = new Vue({
     router,
     render: h => h(App)
 }).$mount('#app');

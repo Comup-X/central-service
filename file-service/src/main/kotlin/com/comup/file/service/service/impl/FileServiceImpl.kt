@@ -45,7 +45,9 @@ class FileServiceImpl : FileService {
             }
             null
         }
-        return fileInfoRepository.findAll(specification, pageRequest)
+        val page = fileInfoRepository.findAll(specification, pageRequest)
+        println(page)
+        return page
     }
 
     override fun flushFile(response: HttpServletResponse, fileInfoPK: FileInfoPK) {
@@ -57,7 +59,7 @@ class FileServiceImpl : FileService {
         val file = if (fileInfo.fileInfoPK!!.scheme == "file") {
             File(Paths.get(fileInfo!!.fileInfoPK!!.path, fileInfo.fileInfoPK!!.fileName).toUri())
         } else {
-            val uri = URI(fileInfoPK.scheme, null, fileInfoPK.host, fileInfoPK.port, fileInfoPK.path, null, null)
+            val uri = URI(fileInfoPK.scheme, null, fileInfoPK.host, fileInfoPK.port!!, fileInfoPK.path, null, null)
             File(uri)
         }
         val inputStream = FileInputStream(file)

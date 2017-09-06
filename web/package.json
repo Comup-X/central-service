@@ -1,7 +1,7 @@
 {
-  "name": "element-ui-test",
+  "name": "comup-site",
   "description": "A Vue.js project",
-  "author": "yi.shyang@ele.me",
+  "author": "xlz35429674@foxmail.com",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --env.dev",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "element-ui": "^1.4.2",
+    "element-ui": "^1.4.4",
     "highlight.js": "^9.12.0",
     "marked": "^0.3.6",
     "vue": "^2.4.2",

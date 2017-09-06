@@ -9,7 +9,7 @@ data class Result(
 
     companion object {
         fun ok(data: Any): Result {
-            return Result(0, "SUCCESS", data)
+            return Result(200, "SUCCESS", data)
         }
 
         fun error(message: String): Result {
