@@ -16,16 +16,20 @@ Vue.use(ElementUI);
 axios.defaults.baseURL = 'http://127.0.0.1:8080';
 //全局响应预处理
 axios.interceptors.response.use(function (response) {
-    if (response.data.code !== 200) {
+    if (response.data.code !== 0) {
         v.$alert(response.data.message, 'Error', {
             confirmButtonText: '确定',
         });
+        // return Promise.reject(response);
     } else {
         return response.data.data;
     }
 }, function (error) {
-    // Do something with response error
-    return Promise.reject(error);
+    v.$message({
+        type: 'error',
+        message: error.message
+    });
+    //return Promise.reject(error);这行代码触发axios的catch方法
 });
 //设置请求头
 // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';

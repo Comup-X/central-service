@@ -89,7 +89,7 @@ public class FileServiceImpl implements FileService {
             boolean mkSuccess = path.exists() || path.mkdirs();
             if (!mkSuccess) throw new IllegalAccessException("Create file directory error");
 
-            String[] split = file.getOriginalFilename().split(".");
+            String[] split = file.getOriginalFilename().split("\\.");
             FileInfoPK fileInfoPK = new FileInfoPK();
             FileInfo fileInfo = new FileInfo();
             fileInfo.setFileInfoPK(fileInfoPK);
@@ -99,7 +99,7 @@ public class FileServiceImpl implements FileService {
             fileInfoPK.setHost("");
             fileInfoPK.setPort(0);
             fileInfoPK.setPath(uploadLocation);
-            fileInfoPK.setFileName(UUID.randomUUID().toString() + "." + split[split.length - 1]);
+            fileInfoPK.setFileName(UUID.randomUUID().toString() + "." + split[split.length - 1 < 0 ? 0 : split.length - 1]);
 
             File willSaveFile = Paths.get(uploadLocation, fileInfoPK.getFileName()).toFile();
             mkSuccess = willSaveFile.exists() || willSaveFile.createNewFile();
