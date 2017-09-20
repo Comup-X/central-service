@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 @Embeddable
 public class FileInfoPK implements Serializable {
+    private static final long serialVersionUID = -8246906426037035118L;
+
     private String scheme;
     private String host;
     private Integer port;

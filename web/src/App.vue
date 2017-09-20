@@ -3,7 +3,8 @@
         <el-menu defaultActive="" theme="dark" class="el-menu-demo nav" mode="horizontal" :router="true">
             <el-menu-item index="1" :route="{path:'/frame/https/xlz35429674.3322.org/13000'}">Gogs</el-menu-item>
             <el-menu-item index="2" :route="{path:'/frame/https/xlz35429674.3322.org/18000'}">Seafile</el-menu-item>
-            <el-menu-item index="3" :route="{path:'/frame/https/xlz35429674.3322.org/1800'}">Shadowsocks-Manager</el-menu-item>
+            <el-menu-item index="3" :route="{path:'/frame/https/xlz35429674.3322.org/1800'}">Shadowsocks-Manager
+            </el-menu-item>
             <el-menu-item index="4" :route="{path:'/markDown'}">Mark-Down</el-menu-item>
             <el-submenu index="5">
                 <template slot="title">Game</template>
@@ -14,6 +15,14 @@
                 <el-menu-item index="6-1" :route="{path:'/image/list'}">Gallery</el-menu-item>
                 <el-menu-item index="6-2" :route="{path:'/image/upload'}">Image-Upload</el-menu-item>
             </el-submenu>
+            <el-submenu index="7">
+                <template slot="title">Nav</template>
+                <span v-for="(item,index) in navs">
+                    <el-menu-item :index="'7-'+index"
+                                  :route="{path:getNavUrl(item)}">{{item.name}}
+                    </el-menu-item>
+                </span>
+            </el-submenu>
         </el-menu>
         <div class="content">
             <router-view class="fullParent clean"></router-view>
@@ -22,16 +31,28 @@
 </template>
 
 <script>
-
-
     export default {
         data() {
-            return {}
+            return {
+                navs: []
+            }
         },
 
-        methods: {},
+        methods: {
+            getNavUrl(item) {
+                return '/frame/' + item.navPK.protocol + '/' + item.navPK.hostname + '/' + item.navPK.port
+            }
+        },
 
         mounted() {
+            let v = this;
+            this.axios.get('/personal-site/index/nav', {
+                params: {}
+            }).then(result => {
+                for (var i = 0; i < result.length; i++) {
+                    v.navs.push(result[i])
+                }
+            });
         }
     }
 </script>

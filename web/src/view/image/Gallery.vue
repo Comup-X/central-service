@@ -18,7 +18,7 @@
             getImageUrl(item) {
                 debugger;
                 let pk = item.fileInfoPK;
-                return this.axios.defaults.baseURL + '/zuul/file/downLoad?' +
+                return this.axios.defaults.baseURL + '/zuul/file-service/file/downLoad?' +
                     'scheme=' + pk.scheme + '&' +
                     'host=' + pk.host + '&' +
                     'port=' + pk.port + '&' +
@@ -29,7 +29,7 @@
 
         mounted() {
             let v = this;
-            this.axios.get('/zuul/file/listFile', {
+            this.axios.get('/zuul/file-service/file/listFile', {
                 params: {
                     currentPage: 0,
                     pageSize: 50,
