@@ -1,7 +1,6 @@
 package com.comup.file.service.service.impl;
 
 import com.comup.file.service.entity.FileInfo;
-import com.comup.file.service.entity.pk.FileInfoPK;
 import com.comup.file.service.repository.FileInfoRepository;
 import com.comup.file.service.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +57,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void flushFile(HttpServletResponse response, FileInfoPK fileInfoPK) throws IOException, URISyntaxException {
-        FileInfo fileInfo = fileInfoRepository.findOne(fileInfoPK);
+    public void flushFile(HttpServletResponse response, Long id) throws IOException, URISyntaxException {
+        FileInfo fileInfo = fileInfoRepository.findOne(id);
         if (fileInfo == null) {
             throw new FileNotFoundException();
         }
@@ -68,10 +67,10 @@ public class FileServiceImpl implements FileService {
         response.setHeader("Content-Disposition", "attachment; filename=" + filename);
         response.setContentType("application/octet-stream; charset=utf-8");
         File file;
-        if (Objects.equals(fileInfo.getFileInfoPK().getScheme(), "file")) {
-            file = new File(Paths.get(fileInfo.getFileInfoPK().getPath(), fileInfo.getFileInfoPK().getFileName()).toUri());
+        if (Objects.equals(fileInfo.getScheme(), "file")) {
+            file = new File(Paths.get(fileInfo.getPath(), fileInfo.getFileName()).toUri());
         } else {
-            URI uri = new URI(fileInfoPK.getScheme(), null, fileInfoPK.getHost(), fileInfoPK.getPort(), fileInfoPK.getPath(), null, null);
+            URI uri = new URI(fileInfo.getScheme(), null, fileInfo.getHost(), fileInfo.getPort(), fileInfo.getPath(), null, null);
             file = new File(uri);
         }
         InputStream inputStream = new FileInputStream(file);
@@ -90,18 +89,16 @@ public class FileServiceImpl implements FileService {
             if (!mkSuccess) throw new IllegalAccessException("Create file directory error");
 
             String[] split = file.getOriginalFilename().split("\\.");
-            FileInfoPK fileInfoPK = new FileInfoPK();
             FileInfo fileInfo = new FileInfo();
-            fileInfo.setFileInfoPK(fileInfoPK);
             fileInfo.setOriginalFilename(file.getOriginalFilename());
             fileInfo.setFileType(file.getContentType());
-            fileInfoPK.setScheme("file");
-            fileInfoPK.setHost("");
-            fileInfoPK.setPort(0);
-            fileInfoPK.setPath(uploadLocation);
-            fileInfoPK.setFileName(UUID.randomUUID().toString() + "." + split[split.length - 1 < 0 ? 0 : split.length - 1]);
+            fileInfo.setScheme("file");
+            fileInfo.setHost("");
+            fileInfo.setPort(0);
+            fileInfo.setPath(uploadLocation);
+            fileInfo.setFileName(UUID.randomUUID().toString() + "." + split[split.length - 1 < 0 ? 0 : split.length - 1]);
 
-            File willSaveFile = Paths.get(uploadLocation, fileInfoPK.getFileName()).toFile();
+            File willSaveFile = Paths.get(uploadLocation, fileInfo.getFileName()).toFile();
             mkSuccess = willSaveFile.exists() || willSaveFile.createNewFile();
             if (!mkSuccess) throw new IllegalAccessException("文件创建失败");
 

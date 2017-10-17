@@ -3,6 +3,7 @@ import Frame from './view/IFrame.vue'
 import MarkDown from './view/MarkDown.vue'
 import ImageUpload from './view/image/ImageUpload.vue'
 import Gallery from './view/image/Gallery.vue'
+import Report from './view/Report.vue'
 
 const routes = [
     {name: 'animalGame', path: '/animalGame', component: AnimalGame},
@@ -10,6 +11,7 @@ const routes = [
     {name: 'markDown', path: '/markDown', component: MarkDown},
     {name: 'imageUpload', path: '/image/upload', component: ImageUpload},
     {name: 'gallery', path: '/image/list', component: Gallery},
+    {name: 'report', path: '/report', component: Report},
 ];
 
 export default routes;

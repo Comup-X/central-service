@@ -22,7 +22,7 @@ public class IndexController {
         this.indexService = indexService;
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping("/nav")
     public Result<List<Nav>> getNav() {
         return Result.ok(indexService.getNavs());

@@ -1,23 +1,54 @@
 package com.comup.personal.site.entity;
 
-import com.comup.personal.site.entity.pk.NavPK;
-
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Nav {
-    @EmbeddedId
-    private NavPK navPK;
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"protocol", "hostname", "port"}))
+public class Nav implements Serializable {
+
+    private static final long serialVersionUID = 4327747000357892004L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String protocol;
+    private String hostname;
+    private Integer port;
 
     private String name;
 
-    public NavPK getNavPK() {
-        return navPK;
+    public Long getId() {
+        return id;
     }
 
-    public void setNavPK(NavPK navPK) {
-        this.navPK = navPK;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public String getHostname() {
+        return hostname;
+    }
+
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
     }
 
     public String getName() {

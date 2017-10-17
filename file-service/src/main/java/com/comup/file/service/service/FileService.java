@@ -1,7 +1,6 @@
 package com.comup.file.service.service;
 
 import com.comup.file.service.entity.FileInfo;
-import com.comup.file.service.entity.pk.FileInfoPK;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,5 +14,5 @@ public interface FileService {
 
     Page<FileInfo> listFile(Integer currentPage, Integer pageSize, List<String> fileTypes);
 
-    void flushFile(HttpServletResponse response, FileInfoPK fileInfoPK) throws IOException, URISyntaxException;
+    void flushFile(HttpServletResponse response, Long id) throws IOException, URISyntaxException;
 }

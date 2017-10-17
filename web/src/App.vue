@@ -23,6 +23,7 @@
                     </el-menu-item>
                 </span>
             </el-submenu>
+            <el-menu-item index="8" :route="{path:'/report'}">Report</el-menu-item>
         </el-menu>
         <div class="content">
             <router-view class="fullParent clean"></router-view>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+    var x = 0;
     export default {
         data() {
             return {
@@ -40,19 +42,17 @@
 
         methods: {
             getNavUrl(item) {
-                return '/frame/' + item.navPK.protocol + '/' + item.navPK.hostname + '/' + item.navPK.port
+                return '/frame/' + item.protocol + '/' + item.hostname + '/' + item.port
             }
         },
 
-        mounted() {
-            let v = this;
-            this.axios.get('/personal-site/index/nav', {
-                params: {}
-            }).then(result => {
-                for (var i = 0; i < result.length; i++) {
-                    v.navs.push(result[i])
-                }
-            });
+        created() {
+            this.axios.get('/personal-site/index/nav', {params: {}})
+                .then(result => {
+                    for (let i = 0; i < result.length; i++) {
+                        this.navs.push(result[i])
+                    }
+                });
         }
     }
 </script>

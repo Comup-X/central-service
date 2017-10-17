@@ -1,7 +1,6 @@
 package com.comup.file.service.controller;
 
 import com.comup.common.model.Result;
-import com.comup.file.service.entity.pk.FileInfoPK;
 import com.comup.file.service.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +48,7 @@ public class FileController {
     @GetMapping("/downLoad")
     public void downLoad(HttpServletRequest request,
                          HttpServletResponse response,
-                         @ModelAttribute("fileInfoPK") FileInfoPK fileInfoPK) throws IOException, URISyntaxException {
-        fileService.flushFile(response, fileInfoPK);
+                         Long id) throws IOException, URISyntaxException {
+        fileService.flushFile(response, id);
     }
 }
