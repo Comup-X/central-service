@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 Vue.use(ElementUI);
 
 //设置后台基础IP地址
-axios.defaults.baseURL = process.env.API_ROOT;
+axios.defaults.baseURL = __API_URL__;
 //全局响应预处理
 axios.interceptors.response.use(function (response) {
     if (response.data.code !== 0) {

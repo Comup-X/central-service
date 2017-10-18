@@ -47,6 +47,9 @@ module.exports = (options = {}) => ({
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             favicon: 'favicon.ico'
+        }),
+        new webpack.DefinePlugin({
+            __API_URL__: options.dev ? JSON.stringify("http://127.0.0.1:8080") : JSON.stringify("https://xlz35429674.3322.org:18080")
         })
     ],
     resolve: {
@@ -71,4 +74,4 @@ module.exports = (options = {}) => ({
         }
     },
     devtool: options.dev ? '#eval-source-map' : '#source-map'
-})
+});
