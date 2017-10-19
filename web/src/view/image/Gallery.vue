@@ -16,14 +16,12 @@
 
         methods: {
             getImageUrl(item) {
-                debugger;
-                let pk = item.fileInfoPK;
                 return this.axios.defaults.baseURL + '/zuul/file-service/file/downLoad?' +
-                    'scheme=' + pk.scheme + '&' +
-                    'host=' + pk.host + '&' +
-                    'port=' + pk.port + '&' +
-                    'path=' + pk.path + '&' +
-                    'fileName=' + pk.fileName;
+                    'scheme=' + item.scheme + '&' +
+                    'host=' + item.host + '&' +
+                    'port=' + item.port + '&' +
+                    'path=' + item.path + '&' +
+                    'fileName=' + item.fileName;
             }
         },
 
@@ -36,8 +34,7 @@
                     types: 'image'
                 }
             }).then(result => {
-                debugger;
-                for (var i = 0; i < result.content.length; i++) {
+                for (let i = 0; i < result.content.length; i++) {
                     v.images.push(result.content[i])
                 }
             });
