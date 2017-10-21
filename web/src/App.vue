@@ -1,59 +1,34 @@
 <template>
     <div>
         <el-menu defaultActive="" theme="dark" class="el-menu-demo nav" mode="horizontal" :router="true">
-            <el-menu-item index="1" :route="{path:'/frame/https/xlz35429674.3322.org/13000'}">Gogs</el-menu-item>
-            <el-menu-item index="2" :route="{path:'/frame/https/xlz35429674.3322.org/18000'}">Seafile</el-menu-item>
-            <el-menu-item index="3" :route="{path:'/frame/https/xlz35429674.3322.org/1800'}">Shadowsocks-Manager
+            <el-menu-item index="1" :route="{path:'/index'}">Index</el-menu-item>
+            <el-menu-item index="2" :route="{path:'/frame/https/xlz35429674.3322.org/13000'}">Gogs</el-menu-item>
+            <el-menu-item index="3" :route="{path:'/frame/https/xlz35429674.3322.org/18000'}">Seafile</el-menu-item>
+            <el-menu-item index="4" :route="{path:'/frame/https/xlz35429674.3322.org/1800'}">Shadowsocks-Manager
             </el-menu-item>
-            <el-menu-item index="4" :route="{path:'/markDown'}">Mark-Down</el-menu-item>
-            <el-submenu index="5">
-                <template slot="title">Game</template>
-                <el-menu-item index="5-1" :route="{path:'/animalGame'}">Animal-Game</el-menu-item>
-            </el-submenu>
+            <el-menu-item index="5" :route="{path:'/markDown'}">Mark-Down</el-menu-item>
             <el-submenu index="6">
-                <template slot="title">Image</template>
-                <el-menu-item index="6-1" :route="{path:'/image/list'}">Gallery</el-menu-item>
-                <el-menu-item index="6-2" :route="{path:'/image/upload'}">Image-Upload</el-menu-item>
+                <template slot="title">Game</template>
+                <el-menu-item index="6-1" :route="{path:'/animalGame'}">Animal-Game</el-menu-item>
             </el-submenu>
             <el-submenu index="7">
-                <template slot="title">Nav</template>
-                <span v-for="(item,index) in navs">
-                    <el-menu-item :index="'7-'+index"
-                                  :route="{path:getNavUrl(item)}">{{item.name}}
-                    </el-menu-item>
-                </span>
+                <template slot="title">Image</template>
+                <el-menu-item index="7-1" :route="{path:'/image/list'}">Gallery</el-menu-item>
+                <el-menu-item index="7-2" :route="{path:'/image/upload'}">Image-Upload</el-menu-item>
             </el-submenu>
             <el-menu-item index="8" :route="{path:'/report'}">Report</el-menu-item>
         </el-menu>
         <div class="content">
-            <router-view class="fullParent clean"></router-view>
+            <transition>
+                <router-view class="fullParent clean"></router-view>
+            </transition>
         </div>
     </div>
 </template>
 
 <script>
-    var x = 0;
     export default {
-        data() {
-            return {
-                navs: []
-            }
-        },
-
-        methods: {
-            getNavUrl(item) {
-                return '/frame/' + item.protocol + '/' + item.hostname + '/' + item.port
-            }
-        },
-
-        created() {
-            this.axios.get('/personal-site/index/nav', {params: {}})
-                .then(result => {
-                    for (let i = 0; i < result.length; i++) {
-                        this.navs.push(result[i])
-                    }
-                });
-        }
+        name:'App'
     }
 </script>
 

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
@@ -27,7 +28,7 @@ public class Cron extends BaseEntity {
      * 开始日期
      */
     @Column(nullable = false)
-    private Instant startTime;
+    private Date startTime;
 
     /**
      * 备注

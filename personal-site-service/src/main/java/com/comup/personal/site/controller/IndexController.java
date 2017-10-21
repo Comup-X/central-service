@@ -4,7 +4,6 @@ import com.comup.common.model.Result;
 import com.comup.personal.site.entity.Nav;
 import com.comup.personal.site.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +21,9 @@ public class IndexController {
         this.indexService = indexService;
     }
 
-//    @CrossOrigin
     @GetMapping("/nav")
-    public Result<List<Nav>> getNav() {
-        return Result.ok(indexService.getNavs());
+    public Result getNav() {
+        return Result.ok(indexService.getNav());
     }
+
 }

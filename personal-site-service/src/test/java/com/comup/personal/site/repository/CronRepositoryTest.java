@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -26,7 +27,7 @@ public class CronRepositoryTest {
         Cron cron = new Cron();
         cron.setContent("备注");
         cron.setRepeat(Repeat.EVERY_DAY);
-        cron.setStartTime(Instant.now());
+        cron.setStartTime(new Date());
         cron.setTitle("标题");
         cronRepository.save(cron);
     }
@@ -38,7 +39,7 @@ public class CronRepositoryTest {
         Cron cron = new Cron();
         cron.setContent("备注");
         cron.setRepeat(Repeat.EVERY_DAY);
-        cron.setStartTime(Instant.now());
+        cron.setStartTime(new Date());
         cron.setTitle("标题");
         cronRepository.save(cron);
         Cron one = ((List<Cron>)cronRepository.findAll()).get(0);

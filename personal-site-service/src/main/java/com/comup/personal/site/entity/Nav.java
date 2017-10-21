@@ -36,4 +36,9 @@ public class Nav extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    /**
+     * 此连接所属组
+     */
+    @Column(name = "`group`",nullable = false)
+    private String group;
 }

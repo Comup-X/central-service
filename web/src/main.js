@@ -33,11 +33,20 @@ axios.interceptors.response.use(function (response) {
 });
 //设置请求头
 // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+
 //添加axios到Vue全局变量中
 Vue.prototype.axios = axios;
 
 //设置路由
 const router = new VueRouter({routes});
+router.beforeEach((to, from, next) => {
+    if(!to.name){
+        next('/404');
+        return;
+    }
+    //TODO: 这里检查是否登录或者URL权限
+    next();
+});
 
 //挂载Vue到index.html中id=app的div中
 let v = new Vue({

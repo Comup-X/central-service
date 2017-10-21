@@ -1,7 +1,7 @@
 package com.comup.personal.site.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 
 @Data
 @MappedSuperclass
@@ -30,7 +30,7 @@ class BaseEntity implements Serializable {
     @JsonIgnore
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private Instant createdDate = Instant.now();
+    private Date createdDate = new Date();
 
     @JsonIgnore
     @LastModifiedBy
@@ -38,5 +38,5 @@ class BaseEntity implements Serializable {
 
     @JsonIgnore
     @LastModifiedDate
-    private Instant lastModifiedDate = Instant.now();
+    private Date lastModifiedDate = new Date();
 }
