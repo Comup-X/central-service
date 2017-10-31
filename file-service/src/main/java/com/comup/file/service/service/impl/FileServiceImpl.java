@@ -86,7 +86,9 @@ public class FileServiceImpl implements FileService {
         if (!file.isEmpty()) {
             File path = Paths.get(uploadLocation).toFile();
             boolean mkSuccess = path.exists() || path.mkdirs();
-            if (!mkSuccess) throw new IllegalAccessException("Create file directory error");
+            if (!mkSuccess) {
+                throw new IllegalAccessException("Create file directory error");
+            }
 
             String[] split = file.getOriginalFilename().split("\\.");
             FileInfo fileInfo = new FileInfo();

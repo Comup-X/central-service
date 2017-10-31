@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import java.time.Instant;
 import java.util.Date;
 
 @Data
@@ -41,4 +40,10 @@ public class Cron extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "`Repeat`")
     private Repeat repeat;
+
+    /**
+     * 已完成标识
+     */
+    @Column(nullable = false)
+    private Boolean finished = Boolean.FALSE;
 }

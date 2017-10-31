@@ -1,0 +1,80 @@
+package com.comup.user.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * @author Comup
+ */
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class SysUser extends BaseEntity{
+    private static final long serialVersionUID = 1874254041134192955L;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(length = 50, unique = true, nullable = false)
+    private String username;
+
+    @NotNull
+    @JsonIgnore
+    @Size(min = 60, max = 60)
+    @Column(length = 60)
+    private String password;
+
+    @Size(max = 50)
+    @Column(length = 50)
+    private String firstName;
+
+    @Size(max = 50)
+    @Column(length = 50)
+    private String lastName;
+
+    @Email
+    @Size(min = 5, max = 100)
+    @Column(length = 100, unique = true)
+    private String email;
+
+
+    @Size(max = 256)
+    @Column(name = "image_url", length = 256)
+    private String imageUrl;
+
+
+    @JsonIgnore
+    @ManyToMany(targetEntity = SysRole.class,fetch = FetchType.EAGER)
+    @BatchSize(size = 20)
+    private Set<SysRole> roles = new HashSet<>();
+
+    @Transient
+    private Set<GrantedAuthority> authorities = new HashSet<>();
+
+    public Set<GrantedAuthority> getAuthorities() {
+        HashSet<GrantedAuthority> userAuthorities = new HashSet<>();
+        for(SysRole role : this.roles){
+            for(SysAuthority authority : role.getAuthorities()){
+                userAuthorities.add(new SimpleGrantedAuthority(authority.getValue()));
+            }
+        }
+        return userAuthorities;
+    }
+}

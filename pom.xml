@@ -15,8 +15,7 @@
         <module>registry</module>
         <module>file-service</module>
         <module>personal-site-service</module>
-        <module>auth-service</module>
-        <!--<module>api</module>-->
+        <module>user-service</module>
     </modules>
 
     <parent>

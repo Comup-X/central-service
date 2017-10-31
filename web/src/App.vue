@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-menu defaultActive="" theme="dark" class="el-menu-demo nav" mode="horizontal" :router="true">
+        <el-menu defaultActive="" class="el-menu-demo nav" mode="horizontal" :router="true">
             <el-menu-item index="1" :route="{path:'/index'}">Index</el-menu-item>
             <el-menu-item index="2" :route="{path:'/frame/https/xlz35429674.3322.org/13000'}">Gogs</el-menu-item>
             <el-menu-item index="3" :route="{path:'/frame/https/xlz35429674.3322.org/18000'}">Seafile</el-menu-item>
@@ -23,12 +23,13 @@
                 <router-view class="fullParent clean"></router-view>
             </transition>
         </div>
+        <a style="position: absolute;top: 20px;right: 20px;" :href="'https://github.com/login/oauth/authorize?client_id=78801b95845d1f192c38&state=login'">登录</a>
     </div>
 </template>
 
 <script>
     export default {
-        name:'App'
+        name: 'App'
     }
 </script>
 

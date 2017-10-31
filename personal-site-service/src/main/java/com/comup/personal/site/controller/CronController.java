@@ -5,11 +5,13 @@ import com.comup.personal.site.entity.Cron;
 import com.comup.personal.site.service.CronService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/cron")
 public class CronController {
 
     private final CronService cronService;
@@ -19,8 +21,8 @@ public class CronController {
         this.cronService = cronService;
     }
 
-    @GetMapping("/cron")
-    public Result<List<Cron>> getAllCron() {
+    @GetMapping("")
+    public Result getAllCron() {
         return Result.ok(cronService.getCorns());
     }
 

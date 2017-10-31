@@ -49,7 +49,8 @@ module.exports = (options = {}) => ({
             favicon: 'favicon.ico'
         }),
         new webpack.DefinePlugin({
-            __API_URL__: options.dev ? JSON.stringify("http://127.0.0.1:8080") : JSON.stringify("https://xlz35429674.3322.org:18080")
+            __API_URL__: options.dev ? JSON.stringify("http://127.0.0.1:8080") : JSON.stringify("https://xlz35429674.3322.org:18080"),
+            __DEV_ENV__: options.dev ? JSON.stringify(true) : JSON.stringify(false)
         })
     ],
     resolve: {

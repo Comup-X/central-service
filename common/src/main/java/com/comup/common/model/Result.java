@@ -1,5 +1,8 @@
 package com.comup.common.model;
 
+/**
+ * @author Comup
+ */
 public class Result<T> {
     private static final String SUCCESS_STRING = "SUCCESS";
     private static final Integer SUCCESS_CODE = 0;
